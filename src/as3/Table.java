@@ -9,10 +9,6 @@ import java.util.Arrays;
 
 
 
-/**
- *
- * @author brock
- */
 public class Table {
     class Edge {
       int start, end, weight;
