@@ -13,10 +13,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-/**
- *
- * @author brock
- */
+/* “Union-Find Algorithm | Set 2 (Union By Rank and Path Compression).” GeeksforGeeks,
+18 Feb. 2017, www.geeksforgeeks.org/union-find-algorithm-set-2-union-by-rank/.
+This is the source where I found the Union Find Algorithom.
+*/
+/* Authors: Brock Lehnen
+Date: 4/10/2018
+Overview: 
+*/
 public class As3 {
 
     /**
@@ -59,8 +63,9 @@ try (BufferedReader reader = Files.newBufferedReader(logfile, charset)) {
     catch (IOException x) {
     System.err.format("IOException: %s%n", x);
 }
-   int N = 1;
-   int M = 3;
+
+   int N = 1;//vertice
+   int M = 3;//edge
 Table table = new Table(N,M);
 
 
