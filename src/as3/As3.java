@@ -35,7 +35,7 @@ public class As3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        final Path IN_PATH = FileSystems.getDefault().getPath("input/input.txt");
+        final Path IN_PATH = FileSystems.getDefault().getPath("input/these.txt");
         Charset charset = Charset.forName("UTF-8");
 
         // 2D array/Matrix of text file stored here
