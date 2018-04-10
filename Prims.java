@@ -4,115 +4,126 @@
 // The program is for adjacency matrix representation of the graph
 
 
-import java.util.*;
-import java.lang.*;
 import java.io.*;
 import java.nio.charset.Charset;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
-class Prims
+class MST
 {
-	// Number of vertices in the graph
-	private static int V =6;
+   private static final int V=6;
 
-	public int minSpot(int key[], boolean mstSet[])
-	{
-            // min value
-            int min = Integer.MAX_VALUE, minindex=-1;
+   int minSpot(int key[], Boolean mstSet[])
+   {
+       int min = Integer.MAX_VALUE, min_index=-1;
 
-            for (int v = 0; v < V; v++)
+       for (int v = 0; v < V; v++)
+           if (mstSet[v] == false && key[v] < min)
+           {
+               min = key[v];
+               min_index = v;
+           }
+
+       return min_index;
+   }
+
+
+   void print(int parent[], int n, int graph[][])
+   {
+       System.out.println("Edge Weight");
+       for (int i = 1; i < V; i++)
+           System.out.println(parent[i]+" - "+ i+" "+
+                           graph[i][parent[i]]);
+   }
+
+
+   //logic to fo the prim code
+   void tree(int graph[][])
+   {
+       int parent[] = new int[V];
+       int key[] = new int [V];
+
+       Boolean Set[] = new Boolean[V];
+
+       // Initialize all keys as INFINITE
+       for (int i = 0; i < V; i++)
+       {
+           key[i] = Integer.MAX_VALUE;
+           Set[i] = false;
+       }
+
+       key[0] = 0;   // Make key 0 so picked as first vertex
+       parent[0] = -1; // root of MST
+
+       //have V vertices
+       for (int count = 0; count < V-1; count++)
+       {
+          
+           int u = minSpot(key, Set);
+
+           // Add the picked
+           Set[u] = true;
+
+           for (int v = 0; v < V; v++)
+
+               if (graph[u][v]!=0 && Set[v] == false &&
+                   graph[u][v] < key[v])
+               {
+                   parent[v] = u;
+                   key[v] = graph[u][v];
+               }
+       }
+
+       // print the constructed MST
+       print(parent, V, graph);
+   }
+
+   public static void main (String[] args)
+   {
+      
+       final Path IN_PATH = FileSystems.getDefault().getPath("input/input.txt");
+        Charset charset = Charset.forName("UTF-8");
+
+        // 2D array/graph of text file stored here
+        int graph[][] = new int[6][6];
+
+        //read in file and store in graph array
+        try (BufferedReader reader = Files.newBufferedReader(IN_PATH, charset)) {
+            
+            reader.readLine();
+            String line = ""; // stores each line
+            int row = 0; // keep track of current row
+            
+            while ((line = reader.readLine()) != null) 
             {
-                    if (mstSet[v] == false && key[v] < min)
-                    {
-                            min = key[v];
-                            minindex = v;
-                    }
-            }
-
-            return minindex;
-	}
-
-	// print
-	public static void print(int parent[], int n, int graph[][])
-	{
-		System.out.println("Weight");
-		for (int i = 1; i < V; i++)
+           
+                //splits the num at the commas
+                String[] weights = line.split(",");
+                
+                //going through values
+                for (int i = 0; i < 6; i++) 
                 {
-                    System.out.println(parent[i]+" - "+ i + " "+ graph[i][parent[i]]);
-                }
-	}
-	// using adjacency matrix
-	public int[] tree(int graph[][])
-	{
-            int parent[] = new int[V];
-            int key[] = new int [V];
-            boolean set[] = new boolean[V];
-
-            // all keys set to ∞
-            for (int i = 0; i < V; i++)
-            {
-                    key[i] = Integer.MAX_VALUE;
-                    set[i] = false;
-            }
-            key[0] = 0;
-            parent[0] = -1;
-            for (int count = 0; count < V+1; count++)
-            {
-                int u = minSpot(key, set);
-                for (int v = 0; v < V; v++)
-                {
-                    if (graph[u][v]!=0 && set[v] == false && graph[u][v] < key[v])
+                    //setting infinity to max integer
+                    if ("∞".equals(weights[i])) 
                     {
-                            parent[v] = u;
-                            key[v] = graph[u][v];
-                            System.out.print(graph[u][v]);
+                        weights[i] = Integer.toString(Integer.MAX_VALUE); 
                     }
+                    graph[row][i] = Integer.parseInt(weights[i]);
                 }
+                //adding value to row
+                row++;
             }
-            return parent;
-	}
-
-	public static void main (String[] args)
-	{
-            Path path = Paths.get("input\\input.txt");
-            Charset chars = Charset.forName("ISO-8859-1");
-            int graph[][] = new int[6][6];
-            try (BufferedReader reader = Files.newBufferedReader(path, chars))
-            {
-                reader.readLine();
-                String line = null;
-                int spot = 0;
-                while ((line = reader.readLine()) != null)
-                {
-                    String[] weighted = line.split(",");
-
-                    for( int i =0; i == 6; i++)
-                    {
-                        if (weighted[i] == "∞")
-                        {
-                            weighted[i] = Integer.toString(Integer.MAX_VALUE);
-                        }
-                        graph[spot][i] = Integer.parseInt(weighted[i]);
-                    }
-                    spot++;
-                }
-            }
-            catch (IOException x)
-            {
-                System.out.println("No file " + x);
-            }
-            Prims t = new Prims();
+            MST t = new MST();
+            //reader.close();
             t.tree(graph);
-            for (int i = 0; i < graph.length;i++)
-            {
-                for (int j = 0; j< graph.length; j++)
-                {
-                    t.tree(graph);
-                    System.out.println(t.tree(graph));
-                } 
-               //System.out.println(graph[i]);
-            }
+        } 
+        //if it fails it cathces it
+        catch (IOException x) 
+        {
+            System.err.format("IOException: %s%n", x);
         }
-    }
+
+       
+   }
+}
