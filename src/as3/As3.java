@@ -21,57 +21,65 @@ This is the source where I found the Union Find Algorithom.
 Date: 4/10/2018
 Overview: 
 */
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 public class As3 {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-Charset charset = Charset.forName("UTF-8");
-Path logfile = Paths.get("input//these.txt");
+        final Path IN_PATH = FileSystems.getDefault().getPath("input/input.txt");
+        Charset charset = Charset.forName("UTF-8");
 
+        // 2D array/Matrix of text file stored here
+        int matrix[][] = new int[6][6];
 
-int matrix[][] = new int [6][6];
-try (BufferedReader reader = Files.newBufferedReader(logfile, charset)) {
-               
-        
-
-
-            String arr;
-            String line = null;
-            int row = 0;
-            String newline = System.getProperty("line.separator");
-            while ((line = reader.readLine()) != null) {//reads file
-            String[] weight = line.split (",");
-            for (int i=0; i< 6; i++){
-                if ("∞".equals(weight[i])){
-                    weight[i]=Integer.toString(Integer.MAX_VALUE);
-                }
-                matrix[row][i] = Integer.parseInt(weight[i]);
-            }    
-            arr ="  " + newline;//line break in output
-                
-
-            System.out.println(line);
+        //read in file and store in matrix array
+        try (BufferedReader reader = Files.newBufferedReader(IN_PATH, charset)) {
             
-            row++;
+            reader.readLine();
+            String line = ""; // stores each line
+            int row = 0; // keep track of current row
+            
+            while ((line = reader.readLine()) != null) 
+            {
+           
+                //splits the num at the commas
+                String[] weights = line.split(",");
+                
+                //going through values
+                for (int i = 0; i < 6; i++) 
+                {
+                    //setting infinity to max integer
+                    if ("∞".equals(weights[i])) 
+                    {
+                        weights[i] = Integer.toString(Integer.MAX_VALUE); 
+                    }
+                    matrix[row][i] = Integer.parseInt(weights[i]);
+                    System.out.print(matrix[row][i] +"\t");
+                    System.out.print("\n");
+                }
+                
+                //adding value to row
+                row++;
+            }
+ 
+        } 
+        catch (IOException x) 
+        {
+            System.err.format("IOException: %s%n", x);
         }
-         
 
-    } 
-     
-    catch (IOException x) {
-    System.err.format("IOException: %s%n", x);
+        int N = 1;//vertice
+        int M = 3;//edge
+        Table table = new Table(N, M);
+
+    }
 }
-
-   int N = 1;//vertice
-   int M = 3;//edge
-Table table = new Table(N,M);
-
-
-    }
-    }
-
-    
-    
-
