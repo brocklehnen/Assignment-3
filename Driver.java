@@ -1,8 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+//Brittany Couts & Brock Lehnen & Gabby Strong
+//4/10/18
+// The program is for adjacency matrix representation of the graph
+// Can run this program with the Driver class or in the Prim's class.
+// comment out the main method if wishing to test with the driver.
 package outlab3.pkg232;
 
 /**
