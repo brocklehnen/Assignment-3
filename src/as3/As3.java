@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package as3;
+package outlab3.pkg232;
 
 /* “Union-Find Algorithm | Set 2 (Union By Rank and Path Compression).” GeeksforGeeks,
 18 Feb. 2017, www.geeksforgeeks.org/union-find-algorithm-set-2-union-by-rank/.
