@@ -4,7 +4,7 @@
  *Runs through floyds algorithm printing along the way
  *For some reason the code would not work with max inf so I set max Inf to be 100 while running through so it could work
  */
-package floyd;
+package outlab3.pkg232;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class Floyd
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) 
+    void readFile (String[] args)
     {
         
         final Path IN_PATH = FileSystems.getDefault().getPath("input/input.txt");
