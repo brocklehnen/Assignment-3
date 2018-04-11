@@ -3,7 +3,6 @@
 //A Java program for Prim's algorithm.
 // The program is for adjacency matrix representation of the graph
 
-
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.file.FileSystems;
@@ -114,7 +113,7 @@ class Prims
                 //adding value to row
                 row++;
             }
-            MST t = new MST();
+            Prims t = new Prims();
             //reader.close();
             t.tree(graph);
         } 
@@ -127,3 +126,4 @@ class Prims
        
    }
 }
+
