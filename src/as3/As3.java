@@ -10,6 +10,7 @@ package as3;
 This is the source where I found the Union Find Algorithom.
 */
 /* Authors: Brock Lehnen
+Brittany Couts, Gabby Strong
 Date: 4/10/2018
 Overview: 
 */
@@ -21,21 +22,18 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public class As3 {
+public class Kruskal {
 
     /**
      * @param args the command line arguments
      */ 
-    public static void main(String[] args) 
+     void Krus(String[] args) 
     {
        /*
-
         final Path IN_PATH = FileSystems.getDefault().getPath("input/these.txt");
         Charset charset = Charset.forName("UTF-8");
-
         // 2D array/Matrix of text file stored here
         int matrix[][] = new int[6][6];
-
         //read in file and store in matrix array
         try (BufferedReader reader = Files.newBufferedReader(IN_PATH, charset)) {
             
