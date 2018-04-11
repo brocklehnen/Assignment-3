@@ -40,10 +40,10 @@ class Prims
   */ 
    public void print(int parent[], int n, int graph[][])
    {
-       System.out.println("Edge Weight");
+       System.out.println("Prims Edges");
        for (int i = 1; i < V; i++)
        {
-           System.out.println(parent[i]+" - "+ i+" " + graph[i][parent[i]]);
+           System.out.print( i+" " + graph[i][parent[i]] + " ");
        }
    }
    //logic to fo the prim code
@@ -81,7 +81,7 @@ class Prims
        print(parent, V, graph);
    }
 
-   public static void main (String[] args)
+   void readFile (String[] args)
    {
       
        final Path IN_PATH = FileSystems.getDefault().getPath("input/input.txt");
@@ -127,3 +127,4 @@ class Prims
         }
    }
 }
+
