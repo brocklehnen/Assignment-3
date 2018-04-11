@@ -5,10 +5,6 @@
 // comment out the main method if wishing to test with the driver.
 package outlab3.pkg232;
 
-/**
- *
- * @author Britt
- */
 public class Driver
 {
 
@@ -25,7 +21,7 @@ public class Driver
         
         System.out.println("\n\nKruskal method \n");
         Kruskal k = new Kruskal();
-        k.Kruskal(args);
+        k.Krus(args);
               
         
     }
