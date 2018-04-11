@@ -2,8 +2,7 @@
 // Partners: Brittany Couts & Brock Lehnen
 //4/10/18
 // The program is for adjacency matrix representation of the graph
-// Can run this program with the Driver class or in the Prim's class.
-// comment out the main method if wishing to test with the driver.
+// Can run this program with the Driver 
 
 import java.io.*;
 import java.nio.charset.Charset;
