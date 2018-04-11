@@ -1,7 +1,9 @@
 //Gabrielle Strong
+// Partners: Brittany Couts & Brock Lehnen
 //4/10/18
-//A Java program for Prim's algorithm.
 // The program is for adjacency matrix representation of the graph
+// Can run this program with the Driver class or in the Prim's class.
+// comment out the main method if wishing to test with the driver.
 
 import java.io.*;
 import java.nio.charset.Charset;
@@ -13,65 +15,66 @@ class Prims
 {
    private static final int V=6;
 
-   int minSpot(int key[], Boolean mstSet[])
+   public int minSpot(int key[], Boolean setter[])
    {
-       int min = Integer.MAX_VALUE, min_index=-1;
+       int min = Integer.MAX_VALUE, minIndex=-1;
 
        for (int v = 0; v < V; v++)
-           if (mstSet[v] == false && key[v] < min)
+           if (setter[v] == false && key[v] < min)
            {
                min = key[v];
-               min_index = v;
+               minIndex = v;
            }
 
-       return min_index;
+       return minIndex;
    }
-
-
-   void print(int parent[], int n, int graph[][])
+   // attempted to use char array to convert the first 6 nodes into actual A,B,C,D,E,F
+ /*  public String character(int i)
+   {
+        char[] alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".toCharArray();
+        if (i >6)
+        {
+            return null;
+        }
+        return Character.toString(alphabet[i]);
+  */ 
+   public void print(int parent[], int n, int graph[][])
    {
        System.out.println("Edge Weight");
        for (int i = 1; i < V; i++)
-           System.out.println(parent[i]+" - "+ i+" "+
-                           graph[i][parent[i]]);
+       {
+           System.out.println(parent[i]+" - "+ i+" " + graph[i][parent[i]]);
+       }
    }
-
-
    //logic to fo the prim code
-   void tree(int graph[][])
+   public void tree(int graph[][])
    {
        int parent[] = new int[V];
        int key[] = new int [V];
-
        Boolean Set[] = new Boolean[V];
-
        // Initialize all keys as INFINITE
        for (int i = 0; i < V; i++)
        {
            key[i] = Integer.MAX_VALUE;
            Set[i] = false;
        }
-
        key[0] = 0;   // Make key 0 so picked as first vertex
        parent[0] = -1; // root of MST
-
        //have V vertices
        for (int count = 0; count < V-1; count++)
        {
-          
            int u = minSpot(key, Set);
-
            // Add the picked
            Set[u] = true;
-
            for (int v = 0; v < V; v++)
-
+           {
                if (graph[u][v]!=0 && Set[v] == false &&
                    graph[u][v] < key[v])
                {
                    parent[v] = u;
                    key[v] = graph[u][v];
                }
+           }
        }
 
        // print the constructed MST
@@ -122,8 +125,5 @@ class Prims
         {
             System.err.format("IOException: %s%n", x);
         }
-
-       
    }
 }
-
